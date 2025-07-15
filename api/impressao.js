@@ -18,18 +18,28 @@ export default async function handler(req, res) {
 
   const { texto, usuario, documento, paginas, impressora, computador, dataHora } = req.body;
 
-  // Log temporário para diagnosticar dados recebidos
-  console.log("📥 Dados recebidos:", req.body);
-
-  if (!texto && (!usuario || !documento || !paginas)) {
-    return res.status(400).json({ erro: 'Campos obrigatórios ausentes.' });
+  // Validação de campos essenciais
+  if (!documento || !paginas || !usuario || !impressora || !computador || !dataHora) {
+    return res.status(400).json({
+      erro: "Campos obrigatórios ausentes. Certifique-se de enviar todos os dados.",
+    });
   }
 
   try {
+    // Você pode adicionar aqui lógica futura de persistência (ex: banco de dados)
+
     return res.status(200).json({
       status: "sucesso",
-      mensagem: "Dados recebidos.",
-      recebido: req.body,
+      mensagem: "Dados de impressão recebidos com sucesso.",
+      recebido: {
+        documento,
+        paginas,
+        usuario,
+        impressora,
+        computador,
+        dataHora,
+        texto: texto || null,
+      },
     });
   } catch (err) {
     return res.status(500).json({
@@ -38,4 +48,5 @@ export default async function handler(req, res) {
     });
   }
 }
+
 
