@@ -16,23 +16,24 @@ export default async function handler(req, res) {
     return res.status(405).json({ erro: "Método não permitido. Use POST." });
   }
 
-  const { texto } = req.body;
+  const { texto, usuario, documento, paginas, impressora, computador, dataHora } = req.body;
 
-  if (!texto) {
-    return res.status(400).json({ erro: 'O campo "texto" é obrigatório.' });
+  // Log temporário para diagnosticar dados recebidos
+  console.log("📥 Dados recebidos:", req.body);
+
+  if (!texto && (!usuario || !documento || !paginas)) {
+    return res.status(400).json({ erro: 'Campos obrigatórios ausentes.' });
   }
 
   try {
-    console.log("[IMPRESSÃO]", texto);
-
     return res.status(200).json({
       status: "sucesso",
-      mensagem: "Texto recebido para impressão.",
-      textoRecebido: texto,
+      mensagem: "Dados recebidos.",
+      recebido: req.body,
     });
   } catch (err) {
     return res.status(500).json({
-      erro: "Erro interno ao processar impressão.",
+      erro: "Erro interno ao processar dados.",
       detalhes: err.message,
     });
   }
