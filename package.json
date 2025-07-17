@@ -1,22 +1,17 @@
 {
 "name": "theron-backend",
 "version": "1.0.0",
-"description": "Backend da plataforma Theron para monitoramento de impressões",
+"description": "Backend para o sistema Theron - Monitoramento de Impressões",
 "type": "module",
-"main": "index.js",
 "scripts": {
 "start": "node index.js"
 },
-"keywords": \[
+"keywords": [
 "theron",
-"impressão",
-"SaaS",
-"vercel",
-"API"
+"impressao",
+"monitoramento",
+"vercel"
 ],
 "author": "Theron",
-"license": "MIT",
-"dependencies": {
-"crypto": "^1.0.1"
-}
+"license": "MIT"
 }
